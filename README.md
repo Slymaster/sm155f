@@ -1,7 +1,7 @@
 # Samsung Galaxy A15 4G Kernel Source (`SM-A155F`)
 
 Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Galaxy A15 4G**  
-(Modell: **SM-A155F**), basierend auf dem Android 5.10 Kernel aus dem offiziellen Samsung Open Source Release A155FXXS5BYC1.
+(Modell: **SM-A155F**), basierend auf dem Android 5.10 Kernel aus dem offiziellen Samsung Open Source Release A155FXXU6CYE3.
 
 ---
 
@@ -12,7 +12,7 @@ https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.0
 KernelSU-Next 1.0.7
 SusFS 1.5.7
 
-Samsung A155FXXU6CYE3  5.10.205-(currently not spoofed but with dirty removed) #1 SMP PREEMPT Fri May 09 22:46:30 UTC 2025
+Samsung A155FXXU6CYE3  5.10.226-(currently not spoofed but with dirty removed) #1 SMP PREEMPT Fri May 09 22:46:30 UTC 2025
 
 clone the git with:
 
