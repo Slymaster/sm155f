@@ -7,23 +7,22 @@ Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Ga
 
 ## 🧪 Projektstatus
 
-https://github.com/ReeViiS69/sm155f/releases/tag/v1.0.3
+https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.0
 
 KernelSU-Next 1.0.7
 SusFS 1.5.7
 
-Samsung A155FXXS5BYC2 5.10.205-android12-9-28575149 #1 SMP PREEMPT Thu Mar 06 09:35:51 UTC 2025
+Samsung A155FXXU6CYE3  5.10.205-(currently not spoofed but with dirty removed) #1 SMP PREEMPT Fri May 09 22:46:30 UTC 2025
 
 clone the git with:
 
-git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-157susfs4ksun107
+git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-oneui7-157susfs4ksun107
 
 run fixesforsma155f.sh in its own location (chmod +x ./fixesforsma155f.sh)
 
 copy the boot.img from ./maggi/ into boot.tar for flash with odin AP
 
-Build for you on the newly released opensource code of A155FXXS5BYC2 
-thx for requesting it [@poq](https://github.com/poqdavid)
+Build for you on the newly released opensource code of A155FXXU6CYE3
 
 Pull Requests, Vorschläge und Diskussionen sind herzlich willkommen!
 
