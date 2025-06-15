@@ -95,8 +95,8 @@ sed -i -E '/^CONFIG_(SECURITY_DEFEX|PROCA|FIVE|UH|RKP|KDP|KDP_CRED|KDP_NS|KDP_TE
 #done
 #echo "configs in a15_00_defconfig echoed"
 #configure the Kernel metadata
-#sed -i '$s|echo "\$res"|echo "-android12-9-28575149"|' ./scripts/setlocalversion
-perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Fri May 09 22:46:30 UTC 2025"}' ./scripts/mkcompile_h
+sed -i '$s|echo "\$res"|echo "-android12-9-31117096"|' ./scripts/setlocalversion
+perl -pi -e 's{UTS_VERSION="\$\(echo \$UTS_VERSION \$CONFIG_FLAGS \$TIMESTAMP \| cut -b -\$UTS_LEN\)"}{UTS_VERSION="#1 SMP PREEMPT Thu May 29 08:03:09 UTC 2025"}' ./scripts/mkcompile_h
 sed -i 's/-dirty//' ./scripts/setlocalversion
 #echo "kernel metadata spoofed"
 #do kernelbuilding
