@@ -7,12 +7,14 @@ Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Ga
 
 ## 🧪 Projektstatus
 
-https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.0
+https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.1
 
 KernelSU-Next 1.0.7
 SusFS 1.5.7
 
-Samsung A155FXXU6CYE3  5.10.226-(currently not spoofed but with dirty removed) #1 SMP PREEMPT Fri May 09 22:46:30 UTC 2025
+(EUX release as always)
+
+Samsung A155FXXU6CYE3  5.10.226-android12-9-31117096 #1 SMP PREEMPT Thu May 29 08:03:09 UTC 2025
 
 clone the git with:
 
