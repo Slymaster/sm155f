@@ -7,9 +7,9 @@ Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Ga
 
 ## 🧪 Projektstatus
 
-https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.1
+https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.2
 
-KernelSU-Next 1.0.7
+KernelSU-Next 1.0.8
 SusFS 1.5.7
 
 (EUX release as always)
@@ -18,7 +18,7 @@ Samsung A155FXXU6CYE3  5.10.226-android12-9-31117096 #1 SMP PREEMPT Thu May 29 0
 
 clone the git with:
 
-git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-oneui7-157susfs4ksun107
+git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-157susfs4ksun108
 
 run fixesforsma155f.sh in its own location (chmod +x ./fixesforsma155f.sh)
 
@@ -43,7 +43,7 @@ Ich arbeite daran, den Samsung-Kernel so zu erweitern, dass er Root durch folgen
 
 Der Samsung Kernelcode befindet sich nun im Unterordner `Kernel/` für mehr Übersichtlichkeit.
 
-Das Orginal Samsung A155FXXS5BYC2 boot.img ist im Unterordner `samsungbootimg/`
+Das Orginal Samsung A155FXXU6CYE3 boot.img ist im Unterordner `samsungbootimg/`
 
 Topjohnwus magiskboot gebaut durch magojohnji liegt im Unterordner `github.com-topjohnwu @ e791d67`
 
