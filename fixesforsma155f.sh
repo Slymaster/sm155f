@@ -12,7 +12,7 @@ sed -i 's/!= "1"\]; then/!= "1" \]; then/' ../Kernel/kernel/build/build.sh
 #do ksun
 cd ../Kernel/kernel-5.10/
 find . -type f ! -perm -u=w -exec chmod u+w {} +
-curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.0.7
+curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.0.8
 #do susfs stuff
 if [ ! -f "./syscall_hooks.patch" ]; then
     cp ../../gitlab.com-simonpunk/kernel_patches/fs/* ./fs/
@@ -28,6 +28,7 @@ if [ ! -f "./syscall_hooks.patch" ]; then
 	patch -p1 --forward < 10_enable_susfs_for_ksu.patch
 	#echo "patch samsung adjusted susfs to ksun as a fix"
  	cd ./kernel/
+  	sed -i '89s/ \t/ /' 157susfs4ksun107.patch
 	patch -p1 --forward < 157susfs4ksun107.patch
 	cd ../..
 	#echo "patch susfs in kernel"
