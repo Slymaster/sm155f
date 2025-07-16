@@ -12,15 +12,15 @@ sed -i 's/!= "1"\]; then/!= "1" \]; then/' ../Kernel/kernel/build/build.sh
 #do ksun
 cd ../Kernel/kernel-5.10/
 find . -type f ! -perm -u=w -exec chmod u+w {} +
-curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.0.8
+#curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.0.9
 #do susfs stuff
-if [ ! -f "./syscall_hooks.patch" ]; then
+if [ ! -f "./scope_min_manual_hooks_v1.4.patch" ]; then
     cp ../../gitlab.com-simonpunk/kernel_patches/fs/* ./fs/
 	cp ../../gitlab.com-simonpunk/kernel_patches/include/linux/* ./include/linux/
 	cp ../../gitlab.com-simonpunk/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU-Next/
 	cp ../../gitlab.com-simonpunk/kernel_patches/50_add_susfs_in_gki-android12-5.10.patch ./
 	cp ../../wildplus/next/syscall_hooks.patch ./
-	cp ../../wildplus/next/157susfs4ksun107.patch ./KernelSU-Next/kernel/
+	cp ../../wildplus/next/159susfs4ksun109.patch ./KernelSU-Next/kernel/
 	#copy stupid fix for namespace c hunk 1 for different define infront insert and hunk 13 for different code after insert
 	cp ../../wildplus/next/hotfixsamsungnamespace.patch ./
 	cd ./KernelSU-Next/
@@ -28,8 +28,7 @@ if [ ! -f "./syscall_hooks.patch" ]; then
 	patch -p1 --forward < 10_enable_susfs_for_ksu.patch
 	#echo "patch samsung adjusted susfs to ksun as a fix"
  	cd ./kernel/
-  	sed -i '89s/ \t/ /' 157susfs4ksun107.patch
-	patch -p1 --forward < 157susfs4ksun107.patch
+	patch -p1 --forward < 159susfs4ksun109.patch
 	cd ../..
 	#echo "patch susfs in kernel"
 	patch -p1 < 50_add_susfs_in_gki-android12-5.10.patch
@@ -37,7 +36,7 @@ if [ ! -f "./syscall_hooks.patch" ]; then
 	#echo "patch namespace fix"
 	patch -p1 < hotfixsamsungnamespace.patch
 	#echo "patch syscall_hooks"
-	patch -p1 -F 3 < syscall_hooks.patch
+	patch -p1 -F 3 < scope_min_manual_hooks_v1.4.patch
 fi
 CONFIG_FILE="./arch/arm64/configs/a15_00_defconfig"
 CONFIGS=(
@@ -74,26 +73,26 @@ for config in "${CONFIGS[@]}"; do
   fi
 done
 sed -i -E '/^CONFIG_(SECURITY_DEFEX|PROCA|FIVE|UH|RKP|KDP|KDP_CRED|KDP_NS|KDP_TEST|RKP_TEST)=y$/s/=y/=n/' ./arch/arm64/configs/a15_00_defconfig
-#BBRS=(
-#	'CONFIG_TCP_CONG_ADVANCED=y'
-#	'CONFIG_TCP_CONG_BBR=y'
-#	'CONFIG_DEFAULT_BBR=y'
-#	'CONFIG_NET_SCH_FQ=y'
-#	'CONFIG_TCP_CONG_BIC=n'
-#	'CONFIG_DEFAULT_BIC=n'
-#	'CONFIG_DEFAULT_TCP_CONG="bbr"'
-#	'CONFIG_DEFAULT_RENO=n'
-#	'CONFIG_DEFAULT_CUBIC=n'
-#	'CONFIG_TCP_CONG_CUBIC=n'
-#)
-#for bbr in "${BBRS[@]}"; do
-#	key=$(echo "$bbr" | cut -d= -f1)
-#	if grep -q "^$key=" "$CONFIG_FILE"; then
-#		sed -i "s|^$key=.*|$bbr|" "$CONFIG_FILE"
-#	else
-#		echo "$bbr" >> "$CONFIG_FILE"
-#	fi
-#done
+BBRS=(
+	'CONFIG_TCP_CONG_ADVANCED=y'
+	'CONFIG_TCP_CONG_BBR=y'
+	'CONFIG_DEFAULT_BBR=y'
+	'CONFIG_NET_SCH_FQ=y'
+	'CONFIG_TCP_CONG_BIC=n'
+	'CONFIG_DEFAULT_BIC=n'
+	'CONFIG_DEFAULT_TCP_CONG="bbr"'
+	'CONFIG_DEFAULT_RENO=n'
+	'CONFIG_DEFAULT_CUBIC=n'
+	'CONFIG_TCP_CONG_CUBIC=n'
+)
+for bbr in "${BBRS[@]}"; do
+	key=$(echo "$bbr" | cut -d= -f1)
+	if grep -q "^$key=" "$CONFIG_FILE"; then
+		sed -i "s|^$key=.*|$bbr|" "$CONFIG_FILE"
+	else
+		echo "$bbr" >> "$CONFIG_FILE"
+	fi
+done
 #echo "configs in a15_00_defconfig echoed"
 #configure the Kernel metadata
 sed -i '$s|echo "\$res"|echo "-android12-9-31117096"|' ./scripts/setlocalversion
