@@ -19,7 +19,7 @@ if [ ! -f "./scope_min_manual_hooks_v1.4.patch" ]; then
 	cp ../../gitlab.com-simonpunk/kernel_patches/include/linux/* ./include/linux/
 	cp ../../gitlab.com-simonpunk/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU-Next/
 	cp ../../gitlab.com-simonpunk/kernel_patches/50_add_susfs_in_gki-android12-5.10.patch ./
-	cp ../../wildplus/next/syscall_hooks.patch ./
+	cp ../../wildplus/next/scope_min_manual_hooks_v1.4.patch ./
 	cp ../../wildplus/next/159susfs4ksun109.patch ./KernelSU-Next/kernel/
 	#copy stupid fix for namespace c hunk 1 for different define infront insert and hunk 13 for different code after insert
 	cp ../../wildplus/next/hotfixsamsungnamespace.patch ./
