@@ -1,9 +1,32 @@
 # Samsung Galaxy A15 4G Kernel Source (`SM-A155F`)
 
 Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Galaxy A15 4G**  
-(Modell: **SM-A155F**), basierend auf dem Android 5.10 Kernel aus dem offiziellen Samsung Open Source Release A155FXXS5BYC1.
+(Modell: **SM-A155F**), basierend auf dem Android 5.10 Kernel aus dem offiziellen Samsung Open Source Release A155FXXU6CYE3.
 
 ---
+
+## 🧪 Projektstatus
+
+https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.3
+
+KernelSU-Next 1.0.9
+SusFS 1.5.9
+
+(EUX release as always)
+
+Samsung A155FXXU6CYE3  5.10.226-android12-9-31117096 #1 SMP PREEMPT Thu May 29 08:03:09 UTC 2025
+
+clone the git with:
+
+git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-159susfs4ksun109
+
+run fixesforsma155f.sh in its own location (chmod +x ./fixesforsma155f.sh)
+
+copy the boot.img from ./maggi/ into boot.tar for flash with odin AP
+
+Build for you on the newly released opensource code of A155FXXU6CYE3
+
+Pull Requests, Vorschläge und Diskussionen sind herzlich willkommen!
 
 ## ✨ Ziel des Projekts
 
@@ -20,6 +43,18 @@ Ich arbeite daran, den Samsung-Kernel so zu erweitern, dass er Root durch folgen
 
 Der Samsung Kernelcode befindet sich nun im Unterordner `Kernel/` für mehr Übersichtlichkeit.
 
+Das Orginal Samsung A155FXXU6CYE3 boot.img ist im Unterordner `samsungbootimg/`
+
+Topjohnwus magiskboot gebaut durch magojohnji liegt im Unterordner `github.com-topjohnwu @ e791d67`
+
+Simonpunks susfs liegt im Unterordner `gitlab.com-simonpunk @ 53eaa44`
+
+TheWildJames ksun susfs patches liegen im Unterordner `wildplus @ 093e5bf`
+
+KernelSU liegt zur veranschaulichung im adj4build-branch im Unterordner `Kernel/kernel-5.10/`, wird aber in anderen branchs nur live geladen beim Kompilieren
+
+meine Anpassungen sind alle in `/fixesforsma155f.sh`. Bis auf den Samsungsusfspatch. der liegt in `wildplus @ 093e5bf/next/hotfixsamsungnamespace.patch`
+
 ---
 
 ## 🙏 Acknowledgements
@@ -27,7 +62,7 @@ Der Samsung Kernelcode befindet sich nun im Unterordner `Kernel/` für mehr Übe
 Ich möchte mich besonders bei den Entwicklern der folgenden Projekte bedanken:
 
 - **[KernelSU-Next](https://github.com/KernelSU-Next/KernelSU-Next/releases)**  
-  → Vielen Dank für die großartige Arbeit an **KernelSU-Next** und die einfache Implementierungsmöglichkeit. Das hat die Integration dieses Features in diesem Kernel enorm vereinfacht.
+  → Vielen Dank an alle mit wirkenden für die großartige Weiterarbeit an **KernelSU-Next** sowie **KernelSU**(https://github.com/tiann/KernelSU) der grundlage, für die einfache Implementierungsmöglichkeit. Das hat die Integration dieses Features in diesem Kernel enorm vereinfacht.
 
 - **[SusFS für KernelSU](https://gitlab.com/simonpunk/susfs4ksu/-/tree/gki-android12-5.10?ref_type=heads)**  
   → Ein riesiges Dankeschön an Simonpunk den Entwickler von **SusFS**, dessen Arbeit es mir ermöglicht hat, **SusFS** einfach durch Patchdateien zu integrieren. Das hat den Implementierungsprozess sehr viel effizienter gemacht.
@@ -48,14 +83,10 @@ Danke für deinen Beitrag zur Open-Source-Kernel-Community!
 
 ## 📜 Lizenz
 
-Dieses Projekt steht unter der **GNU General Public License Version 2 (GPLv2)**.  
+Der Samsung-Kernel in `/Kernel` steht unter der **GNU General Public License Version 2 (GPLv2)**.  
 Weitere Informationen findest du in der [LICENSE](./LICENSE)-Datei.
+Der Rest dieser Repository steht unter **GNU General Public License Version 3 (GPLv3)**, wenn nicht anders deklariert in den Submodulen.
 
+BITTE KORRIGIERT MICH HIER WENN DAS NICHT STIMMT, CHATGPT HAT GEHOLFEN DIE LIZENZ ZU WÄHLEN WEIL DER SAMSUNG KERNEL DIE LIZENZ HABEN SOLL!
 ---
 
-## 🧪 Projektstatus
-
-Dieses Repository befindet sich in aktiver Entwicklung.  
-Ziel ist es, einen **rootfähigen, stabilen und entwicklerfreundlichen Kernel für das Galaxy A15 4G** bereitzustellen.
-
-Pull Requests, Vorschläge und Diskussionen sind herzlich willkommen!
