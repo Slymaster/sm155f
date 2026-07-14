@@ -12,6 +12,15 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Ajouter du swap (le LTO du noyau est tres gourmand en RAM)
+        run: |
+          sudo fallocate -l 16G /mnt/swapfile
+          sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile
+          sudo swapon /mnt/swapfile
+          echo "--- memoire ---"; free -h
+          echo "--- disque ---"; df -h / /mnt
+
       - name: Dependances de build (python2 pour les scripts Samsung)
         run: |
           sudo apt-get update
@@ -20,10 +29,8 @@ jobs:
             gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi \
             python2 python3 curl git zip unzip cpio \
             build-essential ccache openssl
-          # les scripts de build Samsung (gen_build_config.py) sont en Python 2
           sudo ln -sf "$(command -v python2)" /usr/local/bin/python
-          echo "python -> $(python --version 2>&1)"
-          echo "python3 -> $(python3 --version 2>&1)"
+          python --version
 
       - name: Recuperer le boot.img CYG1 (ramdisk source, depuis la release)
         env:
@@ -32,7 +39,6 @@ jobs:
           mkdir -p samsungbootimg
           gh release download cyg1-boot -R "${{ github.repository }}" \
             -p 'A155F_CYG1_stock_boot.img' -O samsungbootimg/boot.img --clobber
-          ls -la samsungbootimg/boot.img
           sha256sum samsungbootimg/boot.img
 
       - name: Integration KernelSU-Next + SUSFS (script du repo)
@@ -53,7 +59,7 @@ jobs:
           BOOT=$(find . -type f -name boot.img | grep -Ei 'maggi' | head -1)
           [ -z "$BOOT" ] && BOOT=$(find . -type f -name boot.img -newer fixesforsma155f.sh | grep -vi samsungbootimg | head -1)
           echo "boot.img retenu : $BOOT"
-          test -n "$BOOT" || { echo '::error::boot.img introuvable - voir logs'; exit 1; }
+          test -n "$BOOT" || { echo '::error::boot.img introuvable'; exit 1; }
           cp "$BOOT" boot.img
           tar -H ustar -cf boot.tar boot.img
           sha256sum boot.img boot.tar
