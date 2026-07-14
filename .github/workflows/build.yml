@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p samsungbootimg
           gh release download cyg1-boot -R "${{ github.repository }}" \
-            -p 'A155F_CYG1_stock_boot.img' -O samsungbootimg/boot.img
+            -p 'A155F_CYG1_stock_boot.img' -O samsungbootimg/boot.img --clobber
           ls -la samsungbootimg/boot.img
           sha256sum samsungbootimg/boot.img
 
