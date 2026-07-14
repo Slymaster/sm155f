@@ -12,14 +12,18 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Dependances de build
+      - name: Dependances de build (python2 pour les scripts Samsung)
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             bc bison flex libssl-dev libncurses-dev libelf-dev \
             gcc-aarch64-linux-gnu gcc-arm-linux-gnueabi \
-            python3 python-is-python3 curl git zip unzip cpio \
+            python2 python3 curl git zip unzip cpio \
             build-essential ccache openssl
+          # les scripts de build Samsung (gen_build_config.py) sont en Python 2
+          sudo ln -sf "$(command -v python2)" /usr/local/bin/python
+          echo "python -> $(python --version 2>&1)"
+          echo "python3 -> $(python3 --version 2>&1)"
 
       - name: Recuperer le boot.img CYG1 (ramdisk source, depuis la release)
         env:
@@ -33,16 +37,18 @@ jobs:
 
       - name: Integration KernelSU-Next + SUSFS (script du repo)
         run: |
+          set -o pipefail
           chmod +x fixesforsma155f.sh
-          ./fixesforsma155f.sh
+          ./fixesforsma155f.sh 2>&1 | tee fixes.log
 
-      - name: Compiler le noyau   # [ADAPTER si le build GKI diffère]
+      - name: Compiler le noyau
         working-directory: Kernel
         run: |
+          set -o pipefail
           chmod +x build_kernel.sh
           ./build_kernel.sh 2>&1 | tee ../build.log
 
-      - name: Empaqueter boot.tar (Odin AP)   # [ADAPTER chemin de sortie]
+      - name: Empaqueter boot.tar (Odin AP)
         run: |
           BOOT=$(find . -type f -name boot.img | grep -Ei 'maggi' | head -1)
           [ -z "$BOOT" ] && BOOT=$(find . -type f -name boot.img -newer fixesforsma155f.sh | grep -vi samsungbootimg | head -1)
@@ -60,4 +66,5 @@ jobs:
             boot.tar
             boot.img
             build.log
+            fixes.log
           if-no-files-found: warn
