@@ -3,11 +3,18 @@
 Dieses Repository enthält die modifizierten Kernelquellen für das **Samsung Galaxy A15 4G**  
 (Modell: **SM-A155F**), basierend auf dem Android 5.10 Kernel aus dem offiziellen Samsung Open Source Release A155FXXU6CYE3.
 
+> **Fork status:** This is an experimental fork of
+> [ReeViiS69/sm155f](https://github.com/ReeViiS69/sm155f). The fork currently
+> adds a manually triggered GitHub Actions workflow for building a CYG1 boot
+> image with KernelSU-Next and SUSFS. The inherited kernel source and
+> third-party submodules remain credited to their respective authors.
+
 ---
 
 ## 🧪 Projektstatus
 
-https://github.com/ReeViiS69/sm155f/releases/tag/v1.1.3
+[Fork releases](https://github.com/Slymaster/sm155f/releases) ·
+[Latest successful build](https://github.com/Slymaster/sm155f/actions/workflows/build.yml)
 
 KernelSU-Next 1.0.9
 SusFS 1.5.9
@@ -16,9 +23,11 @@ SusFS 1.5.9
 
 Samsung A155FXXU6CYE3  5.10.226-android12-9-31117096 #1 SMP PREEMPT Thu May 29 08:03:09 UTC 2025
 
-clone the git with:
+Clone this fork with its submodules:
 
-git clone --recurse-submodules https://github.com/ReeViiS69/sm155f.git -b bys-159susfs4ksun109
+```bash
+git clone --recurse-submodules https://github.com/Slymaster/sm155f.git
+```
 
 run fixesforsma155f.sh in its own location (chmod +x ./fixesforsma155f.sh)
 
@@ -83,10 +92,8 @@ Danke für deinen Beitrag zur Open-Source-Kernel-Community!
 
 ## 📜 Lizenz
 
-Der Samsung-Kernel in `/Kernel` steht unter der **GNU General Public License Version 2 (GPLv2)**.  
-Weitere Informationen findest du in der [LICENSE](./LICENSE)-Datei.
-Der Rest dieser Repository steht unter **GNU General Public License Version 3 (GPLv3)**, wenn nicht anders deklariert in den Submodulen.
-
-BITTE KORRIGIERT MICH HIER WENN DAS NICHT STIMMT, CHATGPT HAT GEHOLFEN DIE LIZENZ ZU WÄHLEN WEIL DER SAMSUNG KERNEL DIE LIZENZ HABEN SOLL!
----
-
+The repository root includes the
+[GNU General Public License v2.0](./LICENSE). Third-party components,
+submodules, patches, and prebuilt tools remain subject to their own license
+terms. Consult the license files and notices shipped with each component
+before redistributing a build.
